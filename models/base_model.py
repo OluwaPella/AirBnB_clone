@@ -1,7 +1,7 @@
 #!/usr/bin/python3
+"""creates a basemodel class"""
 import uuid
 from datetime import datetime
-import storage
 
 class BaseModel:
     """
@@ -29,6 +29,7 @@ class BaseModel:
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
+        import models
         """
         Updating the public instance attribute updated_at with the current datetime
         """
