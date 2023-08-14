@@ -2,7 +2,7 @@
 
 import uuid
 from datetime import datetime
-
+from models.engine.file_storage import storage
 
 class BaseModel:
     """Base class that defines common attributes and
@@ -23,15 +23,15 @@ class BaseModel:
         else:
             self.id = str(uuid.uuid4())
             self.created_at = self.updated_at = datetime.now()
-
+             storage.new(self)
     def __str__(self):
-        return f"{self.__class__.__name__}
-    - ID: {self.id}\nAttributes: {self.__dict__}"
+        return f"{self.__class__.__name__} - ID: {self.id}\nAttributes: {self.__dict__}"
 
     def save(self):
         """Updating the public instance attribute
         updated_at with the current datetime"""
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """Converts the instance attributes to a dictionary representation"""
